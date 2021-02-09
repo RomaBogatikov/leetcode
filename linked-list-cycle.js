@@ -40,40 +40,29 @@ function detectCycle(head) {
   let fast = head;
 
   let cycle = false;
-  let countLoop;
   while (fast !== null && fast.next !== null) {
     slow = slow.next;
     fast = fast.next.next;
-    if (cycle === true)
-      countLoop++;
     if (slow === fast) {
-      if (countLoop === undefined)
-        countLoop = 0;
-      if (countLoop !== 0)
-        break;
       cycle = true;
+      slow = head;
+      while (slow !== fast) {
+        slow = slow.next;
+        fast = fast.next;
+      }
+      // break;
+      return slow;
     }
   };
 
-  if (cycle === false)
-    return null;
+  // if (cycle === false) return null;
 
-  const getLastElement = (firstElement, count) => {
-    for (let i = 0; i < count; i++) {
-      firstElement = firstElement.next;
-    }
-    return firstElement;
-  };
+  // while (fast !== slow) {
+  //   fast = fast.next.next;
+  //   slow = slow.next;
+  // }
 
-  let first = head;
-  let last = getLastElement(first, countLoop);
-
-  while (first !== last) {
-    first = first.next;
-    last = getLastElement(first, countLoop);
-  }
-
-  return first;
+  return fast;
 }
 
 console.log(detectCycle(ll.head))
