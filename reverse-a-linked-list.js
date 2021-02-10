@@ -41,6 +41,18 @@ class LinkedList {
     return this.head
   }
 
+  reverseIterativePrev2() {
+    let previous = null;
+    while(this.head) {
+      let next = this.head.next;
+      this.head.next = previous;
+      previous = this.head;
+      this.head = next;
+    }
+    this.head = previous;
+    return this.head;
+  }
+
   reverseDummy() {
     if (this.head === null) return this.head;
     let dummy = new Node();
@@ -82,17 +94,28 @@ class LinkedList {
     let next = this.head.next;
     return reverse(previous, current, next)
   }
+
 }
 
+const reverseRecursive2 = (head, prev = null) => {
+  if (head === null) {
+    return null
+  }
+
+  const next = reverseRecursive2(head.next, head);
+  head.next = prev;
+  return next || head;
+}
 let ll1 = new LinkedList();
 ll1.insert(1);
 ll1.insert(2);
 ll1.insert(3);
-ll1.insert(4);
-ll1.insert(5);
+// ll1.insert(4);
+// ll1.insert(5);
 
-// let result = ll1.reverseIterativePrev();
-let result = ll1.reverseDummy();
-let result2 = ll1.reverseRecursive();
+// let result = ll1.reverseIterativePrev2();
+// let result = ll1.reverseDummy();
+// let result2 = ll1.reverseRecursive();
+let result3 = reverseRecursive2(ll1.head)
 console.log(result)
 
