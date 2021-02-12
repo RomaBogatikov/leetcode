@@ -1,4 +1,4 @@
-class Node {
+class ListNode {
   constructor(val, next = null) {
     this.val = val;
     this.next = next;
@@ -11,7 +11,7 @@ class LinkedList {
   }
 
   insert(val, next = null) {
-    let newNode = new Node(val, next);
+    let newNode = new ListNode(val, next);
     if (this.head === null) {
       this.head = newNode;
     } else {
@@ -26,28 +26,37 @@ class LinkedList {
 
 let ll1 = new LinkedList();
 let ll2 = new LinkedList();
-ll1.insert(9);
-ll1.insert(9);
-ll1.insert(9);
-ll1.insert(9);
-ll1.insert(9);
-ll1.insert(9);
-ll1.insert(9);
 
-ll2.insert(9);
-ll2.insert(9);
-ll2.insert(9);
-ll2.insert(9);
+ll1.insert(3);
+ll1.insert(7);
+// ll1.insert(3);
+
+ll2.insert(9)
+ll2.insert(2)
+// ll2.insert(4)
+
+// ll1.insert(9);
+// ll1.insert(9);
+// ll1.insert(9);
+// ll1.insert(9);
+// ll1.insert(9);
+// ll1.insert(9);
+// ll1.insert(9);
+
+// ll2.insert(9);
+// ll2.insert(9);
+// ll2.insert(9);
+// ll2.insert(9);
 
 // ll.insert(-4, ll.head.next);
 console.log(ll1);
 
 let addTwoNumbers = (l1, l2) => {
-  let dummy2 = new Node(null);
+  let dummy2 = new ListNode(null);
   dummy2.next = l2;
   l2 = dummy2;
 
-  let dummy1 = new Node(null);
+  let dummy1 = new ListNode(null);
   dummy1.next = l1;
   l1 = dummy1;
 
@@ -64,8 +73,9 @@ let addTwoNumbers = (l1, l2) => {
       if (current1.val >= 10) {
         current2.val = current1.val;
         current1.val = current1.val % 10;
+      } else {
+        current2.val = sum;
       }
-      current2.val = sum;
     } else {
       current1.val = remainder;
       current2.val = sum;
@@ -76,20 +86,43 @@ let addTwoNumbers = (l1, l2) => {
     current1 = current1.next;
   }
 
-  if (current1 === null) {
+  if (current1 === null && current2 !== null) {
     dummy1.next = current2;
-    if (dummy2.val >= 10) {
-      current2.val += 1;
+    current1 = current2;
+    while (current1) {
+      if (dummy2.val >= 10) {
+        current1.val += 1;
+      }
+      dummy2.val = current1.val;
+      if (current1.val === 10) {
+        current1.val = 0;
+      }
+      dummy1 = dummy1.next;
+      current1 = current1.next;
     }
   }
 
-  if (current2 === null) {
-    if (dummy2.val >= 10) {
-      current1.val += 1;
+  if (current2 === null && current1 !== null) {
+    while (current1) {
+      if (dummy2.val >= 10) {
+        current1.val += 1;
+      }
+      dummy2.val = current1.val;
+      if (current1.val === 10) {
+        current1.val = 0;
+      }
+      dummy1 = dummy1.next;
+      current1 = current1.next;
     }
   }
 
-  return l1;
+  if (dummy2.val >= 10) {
+    let newNode = new ListNode();
+    newNode.val = 1;
+    dummy1.next = newNode;
+  }
+
+  return l1.next;
 }
 
 let result = addTwoNumbers(ll1.head, ll2.head);
