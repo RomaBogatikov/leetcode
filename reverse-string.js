@@ -1,0 +1,43 @@
+// 344. Reverse String
+// Write a function that reverses a string. The input string is given as an array of characters char[].
+
+// Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+// You may assume all the characters consist of printable ascii characters.
+
+
+
+// Example 1:
+
+// Input: ["h","e","l","l","o"]
+// Output: ["o","l","l","e","h"]
+// Example 2:
+
+// Input: ["H","a","n","n","a","h"]
+// Output: ["h","a","n","n","a","H"]
+
+
+var reverseString = function(s) {
+  let swap = (ind1, ind2) => {
+      let temp = s[ind1];
+      s[ind1] = s[ind2];
+      s[ind2] = temp;
+  }
+
+  let left = 0;
+  let right = s.length-1;
+
+  while (left < right) {
+      swap(left, right);
+      left++;
+      right--;
+  }
+
+  return s;
+};
+
+let arr = ["h","e","l","l","o"];
+
+let result = reverseString(arr);
+
+console.log(result);
