@@ -106,7 +106,12 @@ var maxDepthIterative = function(root) {
 var maxDepthRecursive = function(root) {
   if (!root) return 0;
 
-  return Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right)) + 1
+  let leftDepth = maxDepthRecursive(root.left);
+  let rightDepth = maxDepthRecursive(root.right);
+
+  return Math.max(leftDepth, rightDepth) + 1;
+
+  // return Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right)) + 1
 }
 
 tree.insert(3)
