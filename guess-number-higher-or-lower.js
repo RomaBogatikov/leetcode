@@ -38,7 +38,7 @@
 // 1 <= n <= 231 - 1
 // 1 <= pick <= n
 
-var guessNumber = function(n) {
+var guessNumberRecursive = function(n) {
   let search = (left, right) => {
       let pick = Math.floor(left + (right - left)/2)
       let result = guess(pick);
@@ -51,4 +51,23 @@ var guessNumber = function(n) {
   }
 
   return search(1, n);
+};
+
+var guessNumberIterative = function(n) {
+  let left = 1;
+  let right = n;
+
+  while (left <= right) {
+      let guessNum = Math.floor(left + (right - left) / 2);
+      let result = guess(guessNum);
+      if (result === -1) {
+          right = guessNum - 1;
+      } else if (result === 1) {
+          left = guessNum + 1;
+      } else {
+          return guessNum
+      }
+  }
+
+  return null;
 };
