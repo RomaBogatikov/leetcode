@@ -34,3 +34,35 @@
 
 // 1 <= s.length <= 10^5
 // s[i] is one of  '(' , ')' and lowercase English letters.
+
+
+var minRemoveToMakeValid = function(s) {
+  let stack = [];
+  let indexesToDelete = [];
+
+  for (let i = 0; i < s.length; i++) {
+      if (s[i] === '(') {
+          stack.push(i);
+      } else if (s[i] === ')') {
+          if (stack.length === 0) {
+              indexesToDelete.push(i);
+          } else {
+              stack.pop();
+          }
+      }
+  }
+
+  indexesToDelete = [...indexesToDelete, ...stack];
+
+  let result = '';
+
+  for (let i = 0; i < s.length; i++) {
+      if (i === indexesToDelete[0]) {
+          indexesToDelete.shift();
+      } else {
+          result += s[i];
+      }
+  }
+
+  return result;
+};
