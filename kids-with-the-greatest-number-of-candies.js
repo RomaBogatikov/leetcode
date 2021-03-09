@@ -43,3 +43,17 @@ var kidsWithCandies = function(candies, extraCandies) {
   })
 };
 
+var kidsWithCandies2 = function(candies, extraCandies) {
+  let max = 0;
+  for (let i = 0; i < candies.length; i++) {
+    if (candies[i] > max) max = candies[i];
+  }
+  return candies.map((num) => {
+      if (num + extraCandies >= max) {
+          return true;
+      } else {
+          return false;
+      }
+  })
+};
+
