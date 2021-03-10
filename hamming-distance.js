@@ -1,33 +1,44 @@
+// 461. Hamming Distance
+// The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+// Given two integers x and y, calculate the Hamming distance.
+
+// Note:
+// 0 ≤ x, y < 231.
+
+// Example:
+
+// Input: x = 1, y = 4
+
+// Output: 2
+
+// Explanation:
+// 1   (0 0 0 1)
+// 4   (0 1 0 0)
+//        ↑   ↑
+
+// The above arrows point to positions where the corresponding bits are different.
+
+
 var hammingDistance = function(x, y) {
-  let binaryX = '';
-  let binaryY = '';
-
-  while (x > 0) {
-      binaryX = String(x % 2) + binaryX;
-      x = Math.floor(x / 2);
-  }
-  while (y > 0) {
-      binaryY = String(y % 2) + binaryY;
-      y = Math.floor(y / 2);
-  }
-
-  if (binaryX.length > binaryY.length) {
-      for (let i = 0; i < binaryX.length - binaryY.length; i++) {
-          binaryY = '0' + binaryY;
-      }
-  }
-  if (binaryY.length > binaryX.length) {
-      for (let i = 0; i <= binaryY.length - binaryX.length; i++) {
-          binaryX = '0' + binaryX;
-      }
-  }
-
-  let count = 0;
-  for (let i = 0; i < binaryX.length; i++) {
-      if (binaryX[i] !== binaryY[i]) count++
-  }
-
-  return count;
+    let count = 0;
+    
+    while(!(x===0 && y===0)) {
+        if ((x & 1) !== (y & 1)) count++;
+        x = x>>1;
+        y = y>>1;
+    }
+    
+    return count;
 };
 
-let result = hammingDistance(2, 9)
+var hammingDistance2 = function(x, y) {
+    let xorVal = x ^ y;
+    let count = 0;
+    while (xorVal) {
+        if (xorVal & 1) count++;
+        xorVal = xorVal >> 1;
+    }
+}
+
+let result = hammingDistance(1, 4)
