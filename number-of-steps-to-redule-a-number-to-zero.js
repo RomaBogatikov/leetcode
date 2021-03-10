@@ -55,4 +55,15 @@ var numberOfSteps2  = function(num) {
   return count > 0 ? --count : 0;
 };
 
-let result = numberOfSteps2(14)
+var numberOfStepsRecursive = function(num) {
+  if (num === 0) return 0;
+  
+  if ((num & 1) === 0) {
+    return numberOfStepsRecursive(num>>1) + 1;
+  } else {
+    return numberOfStepsRecursive(num-1) + 1;
+  }
+}
+
+let result = numberOfStepsRecursive(14);
+console.log(result);
