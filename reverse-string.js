@@ -36,6 +36,16 @@ var reverseString = function(s) {
   return s;
 };
 
+var reverseStringRecursive = function(s, left = 0, right = s.length - 1) {
+  if (left >= right) return s;
+
+  let temp = s[left];
+  s[left] = s[right];
+  s[right] = temp;
+
+  reverseStringRecursive(s, ++left, --right);
+};
+
 let arr = ["h","e","l","l","o"];
 
 let result = reverseString(arr);
