@@ -2,7 +2,7 @@
 
 var invertTree = function(root) {
   let helper = (node) => {
-      if (!node || (!node.left && !node.right)) {
+      if (!node) {
           return;
       }
       let temp = node.left;
@@ -14,5 +14,17 @@ var invertTree = function(root) {
   }
 
   helper(root);
+  return root;
+};
+var invertTree = function(root) {
+  if (!root) {
+    return null;
+  }
+
+  let left = invertTree(root.left);
+  let right = invertTree(root.right);
+  root.left = right;
+  root.right = left;
+
   return root;
 };
