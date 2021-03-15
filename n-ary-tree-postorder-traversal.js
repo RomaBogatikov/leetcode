@@ -44,3 +44,29 @@ var postorder = function(root) {
   helper(root, result);
   return result;
 };
+
+var postorderIterative = function(root) {
+    let stack1 = [];
+    let stack2 = [];
+    let result = [];
+
+    if (!root) return result;
+    stack1.push(root);
+    while (stack1.length) {
+        let nodeFromStack = stack1.pop();
+        stack2.push(nodeFromStack);
+
+        let nodeFromStackChildrenLength = nodeFromStack.children.length;
+        if (nodeFromStackChildrenLength) {
+            for (let i = 0; i < nodeFromStackChildrenLength; i++) {
+                stack1.push(nodeFromStack.children[i]);
+            }
+        }
+    }
+
+    while (stack2.length) {
+        result.push(stack2.pop().val);
+    }
+
+    return result;
+}
