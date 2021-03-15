@@ -29,40 +29,36 @@
 // Follow up: Recursive solution is trivial, could you do it iteratively?
 
 var preorder = function(root) {
-  let queue = [root];
-  let result = [];
-  if (!root) return [];
+    let traverse = (node) => {
+        result.push(node.val);
+        for (let i = 0; i < node.children.length; i++) {
+            traverse(node.children[i]);
+        }
+    }
 
-  if (root.children) {
-      for (let i = 0; i < root.children.length; i++) {
-          queue.push(root.children[i]);
-      }
-  } else {
-      return [root.val];
-  }
+    let result = [];
+    if (!root) return result;
+    traverse(root);
+    return result;
+};
 
-  result.push(queue.shift().val);
+var preorderIterative = function(root) {
+    if (!root) return [];
+    let stack = [root];
+    let result = [];
+    while (true) {
+        let nodeFromStack = stack.pop();
+        let nodeChildrenLength = nodeFromStack.children.length
 
-  while (queue.length) {
-      let fromQueue = queue.shift();
-      result.push(fromQueue.val);
-      let queue2 = [];
-      if (fromQueue.children) {
-          for (let i = 0; i < fromQueue.children.length; i++) {
-              queue2.push(fromQueue.children[i]);
-          }
-      }
+        while (nodeChildrenLength) {
+            stack.push(nodeFromStack.children[nodeChildrenLength - 1]);
+            nodeChildrenLength--;
+        }
 
-      while(queue2.length) {
-          let fromQueue2 = queue2.shift();
-          result.push(fromQueue2.val);
-          if (fromQueue2.children) {
-              for (let i = 2; i < fromQueue2.children.length; i++) {
-                  queue2.push(fromQueue2.children[i]);
-              }
-          }
-      }
-  }
+        result.push(nodeFromStack.val);
 
-  return result;
+        if (!stack.length) break;
+    }
+
+    return result;
 }
