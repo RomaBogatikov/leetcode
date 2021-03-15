@@ -70,3 +70,23 @@ var getDecimalValueIterative = function(head) {
   return result;
 
 };
+
+// a better approach
+var getDecimalValue = function(head) {
+  let result = head.val;
+  while(head.next) {
+    result = result * 2 + head.next.val;
+    head = head.next;
+  }
+  return result;
+}
+
+// using bitwise operators
+var getDecimalValue = function(head) {
+  let result = head.val;
+  while(head.next) {
+    result = (result<<1) | head.next.val;
+    head = head.next;
+  }
+  return result;
+};
