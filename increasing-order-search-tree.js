@@ -69,3 +69,11 @@ var increasingBSTRecursive = function(root) {
 
   return result[0];
 };
+
+var increasingBST = function(root, next = null) {
+    if (root === null) return next;
+    root.right = increasingBST(root.right, next);
+    let temp = increasingBST(root.left, root);
+    root.left = null;
+    return temp;
+};
