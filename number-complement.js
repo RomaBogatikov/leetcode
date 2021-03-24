@@ -31,6 +31,6 @@ var findComplement = function(num) {
       numberOfBits++;
   }
 
-  let mask = Math.pow(2, numberOfBits) - 1;
+  let mask = (1<<numberOfBits) - 1;
   return copyNum^mask
 };
