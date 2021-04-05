@@ -29,6 +29,7 @@
 // -104 <= Node.val <= 104
 
 
+// my solution (recursive with helper function)
 var isSameTree = function(p, q) {
   let traverse = (node1, node2) => {
       if (node1 === null && node2 === null) return true;
@@ -43,3 +44,13 @@ var isSameTree = function(p, q) {
 
   return traverse(p, q);
 };
+
+// pure recursion
+
+var isSameTree = function(p, q) {
+  if (p === null && q === null) return true;
+  if (p === null || q === null) return false;
+  if (p.val !== q.val) return false;
+
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
