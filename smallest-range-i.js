@@ -31,13 +31,12 @@
 // 0 <= A[i] <= 10000
 // 0 <= K <= 10000
 
-
+// my solution
 var smallestRangeI = function(A, K) {
   let max = Math.max(...A);
   let min = Math.min(...A);
 
   let middleElement = Math.floor((max + min) / 2)
-  let smallest = Infinity;
   let B = A.map(num => {
       let diff = Math.min(Math.abs(num - middleElement), K);
       if (num > middleElement) {
@@ -48,3 +47,21 @@ var smallestRangeI = function(A, K) {
 
   return Math.max(...B) - Math.min(...B);
 };
+
+//  a more concise
+var smallestRangeI = function(A, K) {
+  let max = Math.max(...A);
+  let min = Math.min(...A);
+
+  // minimize max
+  let minimizedMax = max - K;
+
+  // maximize min
+  let maximizedMin = min + K;
+
+  // find difference
+  let diff = minimizedMax - maximizedMin;
+
+  // if difference is less than 0, return 0
+  diff < 0 ? 0 : diff;
+}
