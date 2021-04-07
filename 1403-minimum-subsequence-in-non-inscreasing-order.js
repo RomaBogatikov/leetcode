@@ -29,6 +29,8 @@
 // 1 <= nums.length <= 500
 // 1 <= nums[i] <= 100
 
+// O(n) time
+// O(101) space
 var minSubsequence = function(nums) {
   let buffer = Array.from({length: 101}, () => []);
   let sumTotal = 0;
