@@ -44,3 +44,19 @@ var isAnagram = function(s, t) {
 
   return true;
 };
+
+var isAnagram = function(s, t) {
+    const aCode = 'a'.charCodeAt(0);
+    let letters = Array.from({ length: 26 }, () => 0);
+
+    for (let i = 0; i < s.length; i++) {
+        letters[s.charCodeAt(i) - aCode] += s.charCodeAt(i);
+    }
+
+    for (let i = 0; i < t.length; i++) {
+        letters[t.charCodeAt(i) - aCode] -= t.charCodeAt(i)
+
+    }
+
+    return letters.every(l => l === 0)
+};
