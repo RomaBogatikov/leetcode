@@ -34,3 +34,31 @@
 var arrayStringsAreEqual = function(word1, word2) {
   return word1.join('') === word2.join('');
 };
+
+var arrayStringsAreEqual = function(word1, word2) {
+  let p1 = 0;
+  let p2 = 0;
+  
+  let ind1 = 0;
+  let ind2 = 0
+  
+  while (ind1 < word1.length && ind2 < word2.length) {
+      if (word1[ind1].charAt(p1) !== word2[ind2].charAt(p2)) return false;
+
+      p1++;
+      p2++;
+      if (word1[ind1].charAt(p1) === '') {
+          p1 = 0;
+          ind1++;
+      }
+      if (word2[ind2].charAt(p2) === '') {
+          p2 = 0;
+          ind2++;
+      }
+  }
+  
+  // check that one word is not a substring of another word
+  return ind1 === word1.length && ind2 === word2.length;
+};
+
+let result = arrayStringsAreEqual2(["ab", "c"], ["a", "bc"])

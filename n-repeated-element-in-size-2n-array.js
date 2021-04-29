@@ -36,3 +36,11 @@ var repeatedNTimes = function(A) {
       }
   }
 };
+
+var repeatedNTimes = function(A) {
+    for (let i = 1; i <= 3; i++) {
+        for (let k = 0; k < A.length - i; k++) {
+            if (A[k] === A[k + i]) return A[k]
+        }
+    }
+};
