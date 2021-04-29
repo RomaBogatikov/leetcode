@@ -69,3 +69,16 @@ var sortByBits = function(arr) {
 
   return res;
 };
+
+var sortByBits = function(arr) {
+  const numberOf1s = (num) => {
+      let count = 0;
+      while (num !== 0) {
+          count += (num & 1);
+          num = num >> 1;
+      }
+      return count;
+  }
+
+  return arr.sort((a, b) => numberOf1s(a) - numberOf1s(b) || a - b)
+};
